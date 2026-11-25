@@ -222,3 +222,10 @@
 .progress-photo-item small{font-size:9px;color:#b6c0aa}
 .progress-photo-item .icon-btn{width:28px;height:28px}
 @media(max-width:420px){.progress-photo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.fitness-snapshot{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:10px}
+.snapshot-card{display:flex;flex-direction:column;gap:7px;min-width:0}
+.snapshot-card>strong{font-size:clamp(25px,6vw,34px);line-height:1.05;letter-spacing:-1.3px;color:#f2f5ec;font-weight:750}
+.snapshot-card>small{font-size:10px;line-height:1.45;color:#aeb8a3}
+.snapshot-card .wide-track{margin-top:3px}
+@media(max-width:360px){.fitness-snapshot{grid-template-columns:1fr}}
