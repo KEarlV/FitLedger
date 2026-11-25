@@ -23,7 +23,7 @@ export default function LoginPage() {
     if (mode === "register") {
       const { data, error } = await supabase.auth.signUp({
         email: normalizedEmail, password,
-        options: { data: { display_name: name }, emailRedirectTo: `${window.location.origin}/auth/callback` },
+        options: { data: { display_name: name }, emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://fitledger-tinggala.vercel.app"}/auth/callback` },
       });
       if (error) setMessage(error.message);
       else if (data.session) window.location.assign("/");
@@ -38,7 +38,7 @@ export default function LoginPage() {
   async function resetPassword() {
     const normalizedEmail = email.trim().toLowerCase();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) { setMessage("Enter a valid email address first."); return; }
-    const { error } = await createClient().auth.resetPasswordForEmail(normalizedEmail, { redirectTo: `${window.location.origin}/auth/callback?next=/reset-password` });
+    const { error } = await createClient().auth.resetPasswordForEmail(normalizedEmail, { redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://fitledger-tinggala.vercel.app"}/auth/callback?next=/reset-password` });
     setMessage(error?.message ?? "Password reset email sent. Check your inbox.");
   }
   return <main className="auth-shell">
