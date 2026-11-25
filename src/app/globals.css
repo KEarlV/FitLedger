@@ -23,7 +23,7 @@
 .food-save-btn:disabled{opacity:.6}
 .nutrition-guide-note{display:block;margin-top:8px;color:#9ba58f;font-size:9px;line-height:1.5}
 .meal-media-card{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);overflow:hidden;margin-top:22px;background:var(--panel);border:1px solid var(--line);border-radius:12px;min-height:190px}
-.meal-media-image{min-height:190px;background-image:url("https://www.arise-app.com/images/dishes/en/filipino-style-meal-with-chicken-adobo-tofu-eggs-and-drqdya.webp");background-size:cover;background-position:center}
+.meal-media-image{min-height:190px;background-image:url("https://images.pexels.com/photos/30635714/pexels-photo-30635714.jpeg?auto=compress&cs=tinysrgb&w=1200");background-size:cover;background-position:center}
 .meal-media-copy{padding:18px;display:flex;flex-direction:column;justify-content:center}
 .meal-media-copy h3{font:700 17px Manrope;margin:8px 0}
 .meal-media-copy p{font-size:11px;line-height:1.6;color:var(--muted);margin:0}
@@ -43,3 +43,12 @@
 .nutrition-target-grid input{width:100%;height:35px;min-width:0;background:#22291f;border:1px solid #3b4633;border-radius:6px;padding:0 8px;color:var(--text);font-size:11px}
 .nutrition-targets>p{color:var(--muted);font-size:9px;line-height:1.5;margin:10px 0 0}
 @media(max-width:760px){.nutrition-target-grid{grid-template-columns:1fr 1fr}.nutrition-targets summary span{display:block;margin:5px 0 0}}
+
+/* Exercise learning resources */
+.exercise-media-panel{margin-top:20px;overflow:hidden;border:1px solid #394332;border-radius:12px;background:linear-gradient(120deg,#20271b,#171b16),url("https://images.pexels.com/photos/6455896/pexels-photo-6455896.jpeg?auto=compress&cs=tinysrgb&w=1200") right center/cover no-repeat;background-blend-mode:normal;padding:20px;position:relative}
+.exercise-media-copy{max-width:720px;padding:18px;background:rgba(17,19,16,.9);border:1px solid #3b4633;border-radius:10px;backdrop-filter:blur(8px)}
+.exercise-media-copy h3{font:700 18px Manrope;margin:8px 0}.exercise-media-copy p{font-size:11px;line-height:1.65;color:#aab29f;max-width:620px;margin:0}
+.exercise-media-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:14px}
+.exercise-media-links a,.media-inspiration-link{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 10px;border:1px solid #3b4633;border-radius:7px;background:#20271c;color:var(--lime);font-size:10px;text-decoration:none}
+.exercise-media-links a:hover,.media-inspiration-link:hover{background:#2a3522}.media-inspiration-link{display:inline-flex;justify-content:flex-start;margin-top:12px}
+@media(max-width:760px){.exercise-media-panel{padding:12px;background-position:70% center}.exercise-media-copy{padding:13px}.exercise-media-links{grid-template-columns:1fr}.exercise-media-copy h3{font-size:15px}}
