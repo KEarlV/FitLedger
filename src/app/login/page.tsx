@@ -31,7 +31,7 @@ export default function LoginPage() {
   }
   async function resetPassword() {
     if (!email) { setMessage("Enter your email first."); return; }
-    const { error } = await createClient().auth.resetPasswordForEmail(email, { redirectTo: `${window.location.origin}/auth/callback` });
+    const { error } = await createClient().auth.resetPasswordForEmail(email, { redirectTo: `${window.location.origin}/auth/callback?next=/reset-password` });
     setMessage(error?.message ?? "Password reset email sent. Check your inbox.");
   }
   return <main className="auth-shell">
