@@ -191,3 +191,10 @@
  .builder-history-set{align-items:stretch}
  .builder-history-set .builder-button{flex:1}
 }
+
+.builder-title-input{display:block;width:min(100%,420px);min-width:0;background:transparent;border:0;border-bottom:1px solid #46513b;border-radius:0;padding:5px 0 8px;color:var(--text);font:750 clamp(20px,4vw,27px) Manrope;letter-spacing:-.04em;outline:none}
+.builder-title-input:focus{border-color:var(--lime)}
+.builder-title-input::placeholder{color:#7e8976}
+.builder-exercise-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.builder-exercise-actions .builder-button{width:100%;white-space:normal;line-height:1.25;padding:8px 9px}
+@media(max-width:760px){.builder-exercise-actions{grid-template-columns:repeat(2,minmax(0,1fr))}.builder-exercise-actions .builder-button{min-height:44px}.builder-title-input{font-size:22px}}
