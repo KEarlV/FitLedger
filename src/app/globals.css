@@ -108,3 +108,86 @@
 .workout-set-edit-fields label{display:grid;gap:6px;font-size:11px;font-weight:600;color:#c6cdbd;min-width:0}
 .workout-set-edit-fields input{width:100%;min-width:0;height:43px;padding:0 10px;border:1px solid #48533f;border-radius:8px;background:#20251e;color:#f1f4eb;font-size:14px;color-scheme:dark}
 @media(max-width:760px){.workout-history-group{padding-left:0}.workout-history-set{align-items:flex-start}.workout-set-actions{width:100%}.workout-set-actions button{flex:1;min-height:44px}}
+
+
+/* Workout Builder — calm hierarchy, compact controls, expandable exercise rows */
+.builder-hero{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px;margin:20px 0 14px;border:1px solid #3c4932;border-radius:16px;background:linear-gradient(135deg,#20291d,#171c16 75%);min-width:0}
+.builder-hero h2{font:750 clamp(20px,4vw,27px) Manrope;margin:8px 0 5px;letter-spacing:-.04em}
+.builder-hero p{font-size:12px;color:var(--muted);margin:0}
+.builder-hero-actions,.builder-toolbar-actions{display:flex;gap:8px;flex-wrap:wrap}
+.builder-button{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:0 14px;border:1px solid transparent;border-radius:9px;background:var(--lime);color:#172013;font-size:12px;font-weight:750;cursor:pointer;white-space:nowrap}
+.builder-button.secondary{background:#242c21;border-color:#414d37;color:#e6eddf}
+.builder-button.ghost{background:transparent;border-color:#3b4534;color:#b8c1ad}
+.builder-button.danger{background:transparent;border-color:#69413a;color:#ffb5a9}
+.builder-button:disabled{opacity:.5;cursor:not-allowed}
+.builder-preferences,.builder-panel{margin:12px 0;padding:16px;border:1px solid var(--line);border-radius:13px;background:var(--panel)}
+.builder-section-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;background:none;border:0;color:var(--text);text-align:left;cursor:pointer}
+.builder-section-toggle span{display:grid;gap:4px}.builder-section-toggle b{font-size:13px}.builder-section-toggle small,.builder-panel-head small{font-size:10px;color:var(--muted)}
+.rotated{transform:rotate(180deg)}
+.builder-preference-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-top:17px}
+.builder-preference-grid>label,.builder-custom-row{display:grid;gap:7px;min-width:0;color:#bdc7b4;font-size:11px;font-weight:650}
+.builder-preference-grid select,.builder-search,.builder-save-template input,.builder-custom input,.builder-custom select,.builder-edit-grid input,.builder-history-set input{width:100%;min-width:0;height:43px;padding:0 11px;border:1px solid #3e4936;border-radius:8px;background:#20251e;color:var(--text);font:500 13px 'DM Sans';color-scheme:dark}
+.builder-equipment{grid-column:1/-1;display:grid;gap:8px;color:#bdc7b4;font-size:11px;font-weight:650}
+.builder-equipment>div{display:flex;flex-wrap:wrap;gap:7px}
+.builder-equipment button,.builder-filters button{border:1px solid #3c4734;border-radius:999px;background:#20251e;color:#b7c1ad;padding:8px 11px;font-size:10px}
+.builder-equipment button.chosen,.builder-filters button.selected{background:#2d3924;border-color:#9acb50;color:#d6f6a1}
+.builder-preference-grid .ai-generate{grid-column:1/-1;width:100%;min-height:47px}
+.builder-note{margin:0;color:var(--muted);font-size:10px;line-height:1.6}
+.builder-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:23px 0 12px}
+.builder-toolbar h3{font:700 18px Manrope;margin:4px 0 0}
+.builder-panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.builder-panel-head>div{display:grid;gap:4px}.builder-panel-head b{font-size:13px}
+.builder-icon{width:38px;height:38px;display:grid;place-items:center;border:1px solid var(--line);border-radius:9px;background:#20251e;color:var(--text)}
+.builder-icon.add{color:var(--lime);border-color:#526640}
+.builder-icon.danger{color:#ffb5a9}
+.builder-search{margin-bottom:10px}
+.builder-filters{display:flex;gap:6px;overflow-x:auto;padding:2px 0 10px;scrollbar-width:none}
+.builder-filters button{white-space:nowrap;flex:0 0 auto}
+.builder-library-list{display:grid;gap:6px;max-height:300px;overflow-y:auto}
+.builder-library-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px;border:1px solid rgba(255,255,255,.06);border-radius:9px;background:rgba(255,255,255,.02)}
+.builder-library-item>span{display:grid;gap:4px;min-width:0}.builder-library-item b{font-size:12px}.builder-library-item small{font-size:10px;color:var(--muted)}
+.builder-custom{display:grid;gap:10px;border-top:1px solid var(--line);padding-top:14px;margin-top:14px}
+.builder-custom>b{font-size:12px}.builder-custom-row{grid-template-columns:minmax(0,1fr) 120px}
+.builder-save-template{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+.builder-template-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-top:1px solid var(--line)}
+.builder-template-row>button:first-child{display:grid;gap:4px;text-align:left;background:none;border:0;color:var(--text)}
+.builder-template-row b{font-size:12px}.builder-template-row small{font-size:10px;color:var(--muted)}
+.builder-empty{display:grid;justify-items:center;gap:9px;text-align:center;padding:34px 18px;border:1px dashed #46513c;border-radius:13px;color:var(--muted);font-size:11px;line-height:1.6}
+.builder-empty h3{font:700 17px Manrope;color:var(--text);margin:3px 0}
+.builder-empty p{max-width:290px;margin:0 0 5px}
+.builder-exercise-list{display:grid;gap:8px}
+.builder-exercise{border:1px solid var(--line);border-radius:12px;background:var(--panel);overflow:hidden}
+.builder-exercise-head{width:100%;min-height:70px;display:flex;align-items:center;gap:12px;padding:12px 14px;background:none;border:0;text-align:left;color:var(--text)}
+.builder-exercise-number{display:grid;place-items:center;width:34px;height:34px;flex:0 0 34px;border-radius:9px;background:#252e20;color:var(--lime);font-size:11px;font-weight:700}
+.builder-exercise-title{display:grid;gap:5px;flex:1;min-width:0}.builder-exercise-title b{font-size:13px;line-height:1.35}.builder-exercise-title small{font-size:10px;color:var(--muted);line-height:1.4}
+.builder-exercise-status{display:flex;align-items:center;gap:8px;color:var(--lime)}
+.builder-exercise-body{padding:0 14px 14px;border-top:1px solid var(--line)}
+.builder-edit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding-top:13px}
+.builder-edit-grid label,.builder-history-set label{display:grid;gap:6px;min-width:0;color:#bdc7b4;font-size:10px;font-weight:650}
+.builder-exercise-actions{display:flex;gap:8px;margin-top:12px}.builder-exercise-actions .builder-button{flex:1}
+.builder-message{margin:12px 0}
+.builder-history{margin-top:26px}
+.builder-history-card{padding:14px;margin-bottom:9px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.builder-history-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.builder-history-head>div{display:grid;gap:5px;min-width:0}.builder-history-head b{font-size:13px}.builder-history-head small{font-size:10px;color:var(--muted)}
+.builder-history-set{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:9px 0;border-top:1px solid var(--line);font-size:11px}
+.builder-history-set span{flex:1 1 150px;line-height:1.5;color:var(--muted)}
+.builder-history-set label{flex:1 1 90px}
+.builder-history-set .builder-button{min-height:36px;padding:0 10px;font-size:10px}
+@media(max-width:760px){
+ .builder-hero{align-items:flex-start;flex-direction:column;padding:17px;gap:14px}
+ .builder-hero-actions{width:100%}.builder-hero-actions .builder-button{flex:1}
+ .builder-preference-grid{grid-template-columns:1fr}
+ .builder-equipment,.builder-preference-grid .ai-generate{grid-column:1}
+ .builder-toolbar{align-items:flex-start;flex-direction:column}
+ .builder-toolbar-actions{width:100%}.builder-toolbar-actions .builder-button{flex:1}
+ .builder-preference-grid select,.builder-edit-grid input{height:46px}
+ .builder-edit-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .builder-edit-grid label:last-child:nth-child(3){grid-column:1/-1}
+ .builder-save-template{grid-template-columns:1fr}
+ .builder-custom-row{grid-template-columns:1fr}
+ .builder-history-head{align-items:flex-start;flex-direction:column}
+ .builder-history-head .builder-button{width:100%}
+ .builder-history-set{align-items:stretch}
+ .builder-history-set .builder-button{flex:1}
+}
