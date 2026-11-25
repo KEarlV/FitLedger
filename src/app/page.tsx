@@ -156,7 +156,7 @@ function Budget(p:{spent:number;entries:BudgetEntry[];setEntries:(fn:(v:BudgetEn
 function Progress(p:{weight:string;onSave:(v:string)=>Promise<void>;history:BodyMetric[];xp:number}){
  const [draft,setDraft]=useState(p.weight);const [saving,setSaving]=useState(false);const [message,setMessage]=useState("");
  const [workouts,setWorkouts]=useState<{id:string;title:string|null;started_at:string}[]>([]);
- const [strengthRows,setStrengthRows]=useState<{exercise_name:string;weight_kg:number;reps:number;completed_at:string;session_id:string}[]>([]);
+ const [strengthRows,setStrengthRows]=useState<{exercise_name:string;weight_kg:number|null;reps:number;completed_at:string;session_id:string}[]>([]);
  const [activityLoading,setActivityLoading]=useState(true);const [activityError,setActivityError]=useState("");
  const [selectedExercise,setSelectedExercise]=useState("");
  useEffect(()=>setDraft(p.weight),[p.weight]);
