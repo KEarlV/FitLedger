@@ -198,3 +198,16 @@
 .builder-exercise-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
 .builder-exercise-actions .builder-button{width:100%;white-space:normal;line-height:1.25;padding:8px 9px}
 @media(max-width:760px){.builder-exercise-actions{grid-template-columns:repeat(2,minmax(0,1fr))}.builder-exercise-actions .builder-button{min-height:44px}.builder-title-input{font-size:22px}}
+
+
+/* Weekly planner */
+.weekly-planner{margin-top:14px}
+.weekly-planner-body{display:grid;gap:13px;margin-top:15px}
+.weekly-split-label{display:grid;gap:7px;color:#bdc7b4;font-size:11px;font-weight:650}
+.weekly-split-label select,.weekly-day select{height:42px;min-width:0;padding:0 10px;border:1px solid #3e4936;border-radius:8px;background:#20251e;color:var(--text);font:500 12px 'DM Sans';color-scheme:dark}
+.weekly-planner-body>.builder-button{width:100%;min-height:45px}
+.weekly-days{display:grid;gap:7px}
+.weekly-day{display:grid;grid-template-columns:78px minmax(0,1fr) 62px;align-items:center;gap:8px;padding:9px;border:1px solid rgba(255,255,255,.06);border-radius:9px;background:rgba(255,255,255,.02)}
+.weekly-day>b{font-size:11px;color:#dfe6d6}
+.weekly-day .builder-button{min-height:38px;padding:0 8px;font-size:10px}
+@media(max-width:420px){.weekly-day{grid-template-columns:68px minmax(0,1fr) 55px;gap:6px;padding:7px}.weekly-day select{font-size:11px;padding:0 6px}}
