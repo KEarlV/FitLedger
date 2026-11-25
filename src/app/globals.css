@@ -31,3 +31,15 @@
 .meal-media-links a{display:inline-flex;align-items:center;gap:6px;color:var(--lime);font-size:10px;text-decoration:none}
 .meal-media-links a:hover{text-decoration:underline}
 @media(max-width:760px){.food-entry-form{padding:13px}.food-form-grid.four{grid-template-columns:1fr 1fr}.meal-media-card{grid-template-columns:1fr}.meal-media-image{min-height:155px}.meal-media-copy{padding:15px}.meal-media-copy h3{font-size:15px}}
+
+.nutrition-targets{margin:14px 0 20px;padding:13px 15px;background:#1a2018;border:1px solid var(--line);border-radius:10px}
+.nutrition-targets summary{cursor:pointer;color:#e4eadc;font-size:11px;font-weight:700;list-style:none}
+.nutrition-targets summary::-webkit-details-marker{display:none}
+.nutrition-targets summary:after{content:"＋";float:right;color:var(--lime)}
+.nutrition-targets[open] summary:after{content:"−"}
+.nutrition-targets summary span{margin-left:8px;color:var(--muted);font-size:9px;font-weight:400}
+.nutrition-target-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}
+.nutrition-target-grid label{display:grid;gap:6px;color:#b9c2ae;font-size:9px}
+.nutrition-target-grid input{width:100%;height:35px;min-width:0;background:#22291f;border:1px solid #3b4633;border-radius:6px;padding:0 8px;color:var(--text);font-size:11px}
+.nutrition-targets>p{color:var(--muted);font-size:9px;line-height:1.5;margin:10px 0 0}
+@media(max-width:760px){.nutrition-target-grid{grid-template-columns:1fr 1fr}.nutrition-targets summary span{display:block;margin:5px 0 0}}
