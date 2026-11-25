@@ -11,10 +11,11 @@ export default function ResetPasswordPage() {
   const [busy,setBusy]=useState(false);
   async function submit(event:FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if(password.length < 8){setMessage("Use at least 8 characters for your password.");return;}
     if(password!==confirm){setMessage("Your passwords do not match.");return;}
     setBusy(true);setMessage("");
     const {error}=await createClient().auth.updateUser({password});
-    setMessage(error?.message ?? "Password updated. You can now sign in with your new password.");
+    setMessage(error?.message ?? "Password updated successfully. Redirecting…");
     setBusy(false);
     if(!error) window.setTimeout(()=>window.location.assign("/"),900);
   }
