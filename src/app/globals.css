@@ -90,3 +90,21 @@
  .progress-save-btn{min-height:48px}
  .progress-chart{padding:14px}
 }
+
+/* Editable workout history */
+.workout-history-group{padding:12px 0 8px 42px;border-top:1px solid var(--line);min-width:0}
+.workout-history-group>b{display:block;font-size:13px;margin-bottom:9px;color:var(--text)}
+.workout-history-sets{display:grid;gap:8px}
+.workout-history-set{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.025);font-size:12px;color:var(--muted)}
+.workout-history-set>span{min-width:0;flex:1 1 145px;line-height:1.5}
+.workout-history-set strong{color:var(--text)}
+.workout-set-actions{display:flex;flex-wrap:wrap;gap:7px}
+.workout-set-actions button{border:1px solid transparent;border-radius:8px;background:#b9ee5c;color:#172013;font-size:12px;font-weight:700;min-height:38px;padding:8px 12px;cursor:pointer}
+.workout-set-actions button.secondary{background:#293126;color:#e7eedf;border-color:#48533f}
+.workout-set-actions button.danger{background:transparent;color:#ffb7ae;border-color:#78433d}
+.workout-set-actions button:disabled{opacity:.5;cursor:wait}
+.workout-set-editor{width:100%;display:grid;gap:12px}
+.workout-set-edit-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.workout-set-edit-fields label{display:grid;gap:6px;font-size:11px;font-weight:600;color:#c6cdbd;min-width:0}
+.workout-set-edit-fields input{width:100%;min-width:0;height:43px;padding:0 10px;border:1px solid #48533f;border-radius:8px;background:#20251e;color:#f1f4eb;font-size:14px;color-scheme:dark}
+@media(max-width:760px){.workout-history-group{padding-left:0}.workout-history-set{align-items:flex-start}.workout-set-actions{width:100%}.workout-set-actions button{flex:1;min-height:44px}}
