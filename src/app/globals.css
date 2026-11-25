@@ -52,3 +52,41 @@
 .exercise-media-links a,.media-inspiration-link{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 10px;border:1px solid #3b4633;border-radius:7px;background:#20271c;color:var(--lime);font-size:10px;text-decoration:none}
 .exercise-media-links a:hover,.media-inspiration-link:hover{background:#2a3522}.media-inspiration-link{display:inline-flex;justify-content:flex-start;margin-top:12px}
 @media(max-width:760px){.exercise-media-panel{padding:12px;background-position:70% center}.exercise-media-copy{padding:13px}.exercise-media-links{grid-template-columns:1fr}.exercise-media-copy h3{font-size:15px}}
+
+
+/* FitLedger mobile form polish — clear labels, full-width controls, reliable tap targets */
+.exercise-card{align-items:flex-start}
+.exercise-card>div:last-child{min-width:0;width:100%}
+.exercise-fields{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.exercise-fields label{display:grid;grid-template-columns:minmax(0,1fr);gap:7px;min-width:0;color:#c6cdbd;font-size:11px;font-weight:650;line-height:1.35}
+.exercise-fields label:nth-child(3){grid-column:1/-1}
+.exercise-fields input{display:block;width:100%;min-width:0;height:46px;padding:0 12px;border:1px solid #414b38;border-radius:9px;background:#20251e;color:#f1f4eb;font:500 14px 'DM Sans';color-scheme:dark}
+.exercise-fields input::placeholder{color:#8e9884;opacity:1;font-size:12px}
+.exercise-fields input:focus,.weight-input-label input:focus{outline:2px solid #b9ee5c;outline-offset:2px;border-color:#b9ee5c}
+.exercise-save-btn{width:100%;min-height:46px;height:auto;padding:12px 16px;font-size:13px;border-radius:9px}
+.exercise-save-btn:active,.progress-save-btn:active{transform:scale(.99)}
+.weight-input-label{display:grid;grid-template-columns:1fr;gap:8px;align-items:stretch;font-size:11px;font-weight:650;line-height:1.4}
+.weight-input-label input{box-sizing:border-box;width:100%;height:46px;padding:0 12px;font:500 14px 'DM Sans';color-scheme:dark}
+.progress-save-btn{width:100%;min-height:46px;height:auto;padding:12px 16px;font-size:13px;border-radius:9px;margin-top:12px}
+.progress-summary .panel-card{min-width:0}
+.progress-chart{min-width:0;overflow:hidden}
+.strength-select-label{display:grid;gap:8px;color:#c6cdbd;font-size:11px;font-weight:650;margin-bottom:14px}
+.strength-select-label select{width:100%;min-width:0;height:44px;padding:0 12px;border:1px solid #414b38;border-radius:9px;background:#20251e;color:#f1f4eb;font:500 13px 'DM Sans';color-scheme:dark}
+.chart-caption{font-size:11px;color:#aab29f;margin:2px 0 8px}
+.compact-empty{padding:16px 0}
+@media(max-width:760px){
+ .content-wrap{padding:25px 18px 24px}
+ .exercise-card{padding:16px 14px!important;grid-template-columns:25px minmax(0,1fr)!important;gap:10px!important}
+ .exercise-info b{font-size:13px;line-height:1.4}
+ .exercise-info span{font-size:11px;line-height:1.45}
+ .exercise-fields{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+ .exercise-fields label:nth-child(3){grid-column:1/-1}
+ .exercise-fields input{height:46px;font-size:14px}
+ .exercise-save-btn{min-height:48px;font-size:13px}
+ .progress-summary{grid-template-columns:minmax(0,1fr);gap:12px}
+ .progress-summary .panel-card{min-height:0;padding:18px}
+ .weight-number{font-size:36px}
+ .weight-input-label{margin-top:18px}
+ .progress-save-btn{min-height:48px}
+ .progress-chart{padding:14px}
+}
