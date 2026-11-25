@@ -17,7 +17,7 @@ export default function LoginPage() {
     setBusy(true); setMessage("");
     const normalizedEmail = email.trim().toLowerCase();
     if (mode === "register" && name.trim().length < 2) { setMessage("Please enter a name with at least 2 characters."); setBusy(false); return; }
-    if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(normalizedEmail)) { setMessage("Enter a valid email address."); setBusy(false); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) { setMessage("Enter a valid email address."); setBusy(false); return; }
     if (password.length < 8) { setMessage("Your password must be at least 8 characters."); setBusy(false); return; }
     const supabase = createClient();
     if (mode === "register") {
@@ -25,7 +25,9 @@ export default function LoginPage() {
         email: normalizedEmail, password,
         options: { data: { display_name: name }, emailRedirectTo: `${window.location.origin}/auth/callback` },
       });
-      setMessage(error?.message ?? (data.session ? "Account created. Opening FitLedger…" : "Check your email to verify your account, then sign in."));
+      if (error) setMessage(error.message);
+      else if (data.session) window.location.assign("/");
+      else setMessage("Account created. Check your email to verify your account, then sign in.");
     } else {
       const { error } = await supabase.auth.signInWithPassword({ email: normalizedEmail, password });
       if (error) setMessage(error.message.includes("Invalid login credentials") ? "Email or password is incorrect. Please try again." : error.message);
@@ -35,7 +37,7 @@ export default function LoginPage() {
   }
   async function resetPassword() {
     const normalizedEmail = email.trim().toLowerCase();
-    if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(normalizedEmail)) { setMessage("Enter a valid email address first."); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) { setMessage("Enter a valid email address first."); return; }
     const { error } = await createClient().auth.resetPasswordForEmail(normalizedEmail, { redirectTo: `${window.location.origin}/auth/callback?next=/reset-password` });
     setMessage(error?.message ?? "Password reset email sent. Check your inbox.");
   }
