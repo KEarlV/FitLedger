@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   title: "FitLedger — Train with intention",
   description: "A practical fitness, nutrition and budget companion.",
   applicationName: "FitLedger",
+  manifest: "/manifest.webmanifest",
+  icons: { icon: "/icon.svg" },
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
