@@ -1,1 +1,17 @@
-{"name":"FitLedger — Train with intention","short_name":"FitLedger","description":"Your fitness, nutrition and budget companion.","start_url":"/","display":"standalone","background_color":"#111310","theme_color":"#111310","icons":[]}
+{
+  "name": "FitLedger — Train with intention",
+  "short_name": "FitLedger",
+  "description": "Your fitness, nutrition and budget companion.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d100d",
+  "theme_color": "#0d100d",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
