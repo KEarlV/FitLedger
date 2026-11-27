@@ -26,7 +26,7 @@ export default function LoginPage() {
       if (mode === "register") {
         const { data, error } = await supabase.auth.signUp({
           email: normalizedEmail, password,
-          options: { data: { display_name: name.trim() }, emailRedirectTo: `${window.location.origin}/auth/callback` },
+          options: { data: { display_name: name.trim() }, emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? window.location.origin}/auth/callback` },
         });
         if (error) setMessage(error.message);
         else if (data.session) window.location.assign("/");
@@ -49,7 +49,7 @@ export default function LoginPage() {
     setBusy(true);
     setMessage("");
     try {
-      const { error } = await createClient().auth.resetPasswordForEmail(normalizedEmail, { redirectTo: `${window.location.origin}/auth/callback?next=/reset-password` });
+      const { error } = await createClient().auth.resetPasswordForEmail(normalizedEmail, { redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? window.location.origin}/auth/callback?next=/reset-password` });
       setMessage(error?.message ?? "Password reset email sent. Check your inbox.");
     } catch (error) {
       console.error("Password reset request failed", error);
