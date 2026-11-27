@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="FitLedger">
+  <rect width="512" height="512" rx="112" fill="#0d100d"/>
+  <path d="M72 266h92l45-101 91 211 51-110h89" fill="none" stroke="#c9f27a" stroke-linecap="round" stroke-linejoin="round" stroke-width="34"/>
+  <circle cx="72" cy="266" r="18" fill="#c9f27a"/>
+  <circle cx="440" cy="266" r="18" fill="#c9f27a"/>
+</svg>
