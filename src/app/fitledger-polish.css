@@ -120,3 +120,8 @@ input:disabled,button:disabled{opacity:.58;cursor:not-allowed}
  .hero-graphic,.orb-one,.orb-two{animation:none!important}
  .stat-card,.panel-card,.primary-btn,.food-save-btn,.icon-btn,.quick-actions button{transition:none!important}
 }
+
+/* Keyboard users can jump past the persistent navigation. */
+.skip-link{position:fixed;left:12px;top:12px;z-index:1000;padding:10px 14px;border-radius:9px;background:var(--lime);color:#172011;font-weight:700;transform:translateY(-160%);transition:transform .2s ease}
+.skip-link:focus{transform:translateY(0)}
+@media(prefers-reduced-motion:reduce){.skip-link{transition:none}}
