@@ -24,16 +24,17 @@ export default function FitLedger(){
  const saveWeight=async(value:string)=>{const supabase=createClient();const {data:{user}}=await supabase.auth.getUser();if(!user){notify("Please sign in again.");return;}const {data,error}=await supabase.from("body_metrics").insert({user_id:user.id,weight_kg:Number(value),measured_at:new Date().toISOString()}).select("id,measured_at,weight_kg,waist_cm,sleep_hours,energy_level").single();if(error||!data){notify("Could not save your check-in. Try again.");return;}setWeight(value);setMetricHistory(v=>[data as BodyMetric,...v].slice(0,30));notify("Weight check-in saved.");};
  return (
   <main className="app-shell">
-   <aside className={`sidebar ${mobileMenu?"sidebar-open":""}`}>
+   <a className="skip-link" href="#fitledger-content">Skip to main content</a>
+   <aside id="fitledger-sidebar" className={`sidebar ${mobileMenu?"sidebar-open":""}`}>
     <div className="brand">
      <div className="brand-mark"><Activity size={19}/></div>
      <span>fit<span className="brand-light">ledger</span></span>
      <button className="mobile-close icon-btn" onClick={()=>setMobileMenu(false)} aria-label="Close menu"><X size={18}/></button>
     </div>
     <div className="workspace-label">YOUR SPACE</div>
-    <nav className="side-nav">
+    <nav className="side-nav" aria-label="Primary navigation">
      {nav.map(({name,icon:Icon})=>(
-      <button key={name} onClick={()=>{setTab(name);setMobileMenu(false);}} className={`nav-item ${tab===name?"active":""}`}>
+      <button key={name} onClick={()=>{setTab(name);setMobileMenu(false);}} aria-current={tab===name?"page":undefined} className={`nav-item ${tab===name?"active":""}`}>
        <Icon size={18}/><span>{name}</span>{name==="Training"&&<span className="nav-dot"/>}
       </button>
      ))}
@@ -44,9 +45,9 @@ export default function FitLedger(){
      <div className="profile-row"><div className="avatar">K</div><div className="profile-copy"><strong>Your profile</strong><span>Personal plan</span></div><ChevronDown size={15} className="muted"/></div>
     </div>
    </aside>
-   <section className="main-panel">
+   <section id="fitledger-content" className="main-panel">
     <header className="topbar">
-     <button className="icon-btn mobile-menu-btn" onClick={()=>setMobileMenu(true)} aria-label="Open menu"><Menu size={20}/></button>
+     <button className="icon-btn mobile-menu-btn" onClick={()=>setMobileMenu(true)} aria-label="Open menu" aria-controls="fitledger-sidebar" aria-expanded={mobileMenu}><Menu size={20}/></button>
      <div className="breadcrumb">FITLEDGER <span>/</span> <b>{tab.toUpperCase()}</b></div>
      <div className="top-actions"><span className="date-chip"><CalendarDays size={14}/> {todayLabel()}</span><button className="icon-btn notification" onClick={()=>notify("You're all caught up")} aria-label="Notifications"><Bell size={18}/><i/></button></div>
     </header>
@@ -63,13 +64,13 @@ export default function FitLedger(){
      <footer className="footer-note"><ShieldCheck size={13}/> Your account syncs securely · local backup enabled <span>•</span> FitLedger preview 0.1</footer>
     </div>
    </section>
-   <nav className="mobile-nav">
+   <nav className="mobile-nav" aria-label="Mobile navigation">
     {nav.map(({name,icon:Icon})=>(
-     <button key={name} onClick={()=>setTab(name)} className={tab===name?"selected":""}><Icon size={19}/><span>{name==="Overview"?"Home":name}</span></button>
+     <button key={name} onClick={()=>setTab(name)} aria-current={tab===name?"page":undefined} className={tab===name?"selected":""}><Icon size={19}/><span>{name==="Overview"?"Home":name}</span></button>
     ))}
    </nav>
    <AnimatePresence>
-    {toast&&<motion.div className="toast" initial={{opacity:0,y:18}} animate={{opacity:1,y:0}} exit={{opacity:0,y:10}}><Check size={16}/>{toast}</motion.div>}
+    {toast&&<motion.div className="toast" role="status" aria-live="polite" aria-atomic="true" initial={{opacity:0,y:18}} animate={{opacity:1,y:0}} exit={{opacity:0,y:10}}><Check size={16}/>{toast}</motion.div>}
    </AnimatePresence>
   </main>
  );
