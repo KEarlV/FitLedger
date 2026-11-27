@@ -5,7 +5,11 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const code = searchParams.get("code");
   const requestedNext = searchParams.get("next") ?? "/";
-  const next = requestedNext.startsWith("/") && !requestedNext.startsWith("//") ? requestedNext : "/";
+  const requestUrl = new URL(request.url);
+  const requestedUrl = new URL(requestedNext, requestUrl);
+  const next = requestedUrl.origin === requestUrl.origin
+    ? `${requestedUrl.pathname}${requestedUrl.search}${requestedUrl.hash}`
+    : "/";
   if (code) {
     const supabase = await createClient();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
