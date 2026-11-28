@@ -5,21 +5,24 @@ A mobile-first fitness, nutrition and food-budget companion built around sustain
 ## Current application features
 
 - **Account access:** Supabase email sign-up/sign-in, verification callback and password reset.
-- **Overview:** daily snapshot, activity log, quick navigation and personal rank display.
-- **Training:** workout checklist and cloud persistence for completed exercise sets.
-- **Nutrition:** manual food diary entries with meal type, serving description, calories, protein, carbohydrates and fat; hydration check-in; macro totals from entries the user adds; optional Filipino meal inspiration with a recipe video.
-- **Budget:** food allowance view and quick expense entries.
-- **Progress:** body-weight check-in and consistency view.
-- **Responsive UI:** mobile bottom navigation, desktop sidebar, transitions and reduced-motion support.
-- **Persistence:** browser localStorage plus Supabase profile-state sync and dedicated tables for food, budget and workout records.
+- **Overview:** daily nutrition and spending snapshot, saved workout-day consistency, recent activity and personal rank display.
+- **Training:** workout builder, searchable exercise library, custom exercises, equipment preferences, reusable templates, weekly split planner, optional AI/smart suggestions, set/repetition/load logging, session completion and cloud-backed workout history.
+- **Nutrition:** manual food diary entries with meal type, serving description, calories, protein, carbohydrates and fat; editable entries, confirmed deletion, quick-meal favorites, user-controlled daily targets, hydration check-ins and seven-day history.
+- **Budget:** daily expense logging, category tracking, confirmed deletion and a current-day spending summary.
+- **Progress:** saved body-weight and optional waist check-ins, weekly comparisons, 30-day workout consistency and loaded-set trends, nutrition summaries and private device-only progress photos.
+- **Responsive UI:** mobile bottom navigation, desktop sidebar, touch-sized controls, keyboard skip navigation, clear focus states, transitions and reduced-motion support.
+- **PWA:** web app manifest, branded install icon and standalone display metadata. Offline caching is not enabled yet; authenticated fitness data is not cached by a service worker.
+- **Persistence:** browser localStorage plus Supabase profile-state sync and dedicated tables for food, budget, body metrics, workout sessions and workout sets.
 
-## Important data notes
+## Data and privacy notes
 
-- Nutrition totals are not a personalized medical prescription. Calorie and macro guides are starter references and should be configurable before being treated as personal targets.
-- Food nutrition values vary by ingredient, recipe, cooking method and serving size. Manual entries are user-supplied estimates unless a verified food database is integrated.
-- Meal photos and external recipe videos are optional inspiration, not verified nutrition data or medical guidance.
-- The nutrition diary counts only food entries the user adds; old placeholder nutrition totals are cleared once when the new diary format is first loaded.
-- A number of dashboard visuals and progress indicators remain starter UI and need further validation against actual historical records.
+- Nutrition totals count only food entries the user saves. Manual nutrition values are estimates unless a verified food database is integrated.
+- Calorie and macro targets are optional user-entered tracking preferences, not personalized medical prescriptions.
+- Body weight and optional waist measurements are stored together as one check-in when submitted together.
+- Workout consistency counts distinct local calendar days with at least one saved workout session. A rest day is part of sustainable training; the streak is descriptive, not a target.
+- Progress photos are resized and saved only in the current browser on the current device. They are not uploaded to Supabase or included in cross-device sync.
+- XP and ranks are a local motivational feature, not a verified measure of health or fitness. Server-authoritative XP and achievements remain future work.
+- The AI workout suggestion endpoint requires an authenticated Supabase user, validates the supplied exercise list, and never assigns a working weight automatically.
 
 ## Stack
 
@@ -32,46 +35,34 @@ npm install
 npm run dev
 ```
 
+Available scripts:
+
+- `npm run build` — production build, including Next.js lint/type validation.
+- `npm run lint` — ESLint.
+
 ## Backend
 
 Supabase project URL and publishable key are supplied through environment variables:
+
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
-- `NEXT_PUBLIC_SITE_URL` (production origin used for Auth redirects)
+- `NEXT_PUBLIC_SITE_URL` (configured origin used for Auth redirects)
 
-Never expose a Supabase service-role key in browser code.
-
-## Media and asset sources
-
-- Fitness UI inspiration: [Dribbble fitness tracker interfaces](https://dribbble.com/search/fitness-tracker-app-ui). Reference only; FitLedger does not copy paid designs or assets.
-- Food photography inspiration: [Pexels meal-prep photo](https://www.pexels.com/photo/healthy-meal-prep-with-rice-and-vegetables-30635714/).
-- Training photography inspiration: [Pexels strength-training photo](https://www.pexels.com/photo/woman-training-with-gym-equipment-and-dumbbell-6455896/).
-- General training video inspiration: [Pexels dumbbell workout clip](https://www.pexels.com/video/intense-gym-workout-with-dumbbells-for-strength-32822147/).
-- Pexels permits use of its photos and videos under its license: https://www.pexels.com/legal-pages/license/. External media remains subject to source availability and license terms.
-- Exercise-specific technique links open a YouTube search for the exact movement. They are not vetted endorsements; users should choose qualified instruction and stop if a movement causes pain.
-- A third-party exercise-video dataset was reviewed but not integrated because its own README says the original video provenance is uncertain. FitLedger will not ship media with unclear rights.
-
-## Design references
-
-Interaction patterns were studied from [Gym Ledger](https://github.com/gym-ledger/web), [Ballast](https://github.com/N-O-P-E/Ballast), and [Personal Gym Tracker](https://github.com/jaredf96/personal-gym-tracker). Their code and assets are not copied into this repository.
-
-## Progression
-
-FitLedger has a personal rank ladder configured in `src/lib/ranks.ts`. XP is currently a local progression feature and should not be treated as a verified measure of fitness or health. Server-authoritative XP and achievements remain future work.
+The AI workout suggestion endpoint optionally uses `OPENAI_API_KEY` and `OPENAI_MODEL`. Never expose a Supabase service-role key or OpenAI API key in browser code.
 
 ## API
 
 - `GET /api/progression?xp=500` returns a rank calculation.
-- `POST /api/progression` currently validates and calculates a rank response; it does not make XP authoritative or persist a transaction.
+- `POST /api/progression` validates and calculates a rank response; it does not persist XP.
+- `POST /api/workout-suggestions` generates a conservative session for an authenticated user when an OpenAI key is configured. A local smart-suggestion fallback remains available in the client.
 - `GET /api/health` returns a basic service health response.
 
-## Known gaps / next priorities
+## Remaining priorities
 
-- Load relational food, budget and workout history back into their screens on every device/session.
-- Add editing and deletion for diary records.
-- Add user-controlled nutrition targets and profile-based guidance without guessing personal needs.
-- Add optional food photo upload after configuring private Supabase Storage policies.
-- Expand exercise learning links with reviewed, movement-specific technique sources; general stock footage is inspiration only, never presented as form instruction.
-- Persist body measurements and implement trustworthy history/analytics.
+- Add dated browsing, editing and export for older budget records; the current budget screen focuses on today's entries.
+- Add paginated historical food browsing beyond the seven-day summary.
+- Consider private Supabase Storage for optional progress-photo sync after storage and row-level security policies are reviewed.
 - Replace local-only XP with server-validated, idempotent progression.
-- Complete real-device, accessibility, auth and cross-device QA.
+- Add account data export/deletion and a dedicated settings screen.
+- Design privacy-safe offline behavior before caching authenticated fitness data.
+- Complete real-device QA for authentication, Supabase persistence, responsive layouts, PWA installation and accessibility.
