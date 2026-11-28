@@ -1,17 +1,33 @@
 import { NextRequest, NextResponse } from "next/server";
+import { createClient } from "@/lib/supabase/server";
 
 type Exercise = { name: string; muscle: string; equipment: string; kind: "weighted" | "bodyweight" | "timed"; sets: string; reps: string; weight: string };
 
 export async function POST(request: NextRequest) {
   try {
+    // Protect the paid AI endpoint even if middleware rules change in the future.
+    const supabase = await createClient();
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
+    if (authError || !user) {
+      return NextResponse.json({ error: "Sign in to generate a workout." }, { status: 401 });
+    }
+
     const body = await request.json();
     const { goal, level, equipment, duration, availableExercises } = body ?? {};
-    if (typeof goal !== "string" || typeof level !== "string" || !Array.isArray(equipment) || !Array.isArray(availableExercises)) {
+    if (
+      typeof goal !== "string" || goal.length > 60 ||
+      typeof level !== "string" || level.length > 40 ||
+      !Array.isArray(equipment) || equipment.length > 8 ||
+      !equipment.every((item: unknown) => typeof item === "string" && item.length <= 40) ||
+      !Array.isArray(availableExercises) || availableExercises.length > 40
+    ) {
       return NextResponse.json({ error: "Invalid workout preferences." }, { status: 400 });
     }
     const allowed = (availableExercises as Exercise[]).filter((item) =>
-      item && typeof item.name === "string" && typeof item.muscle === "string" &&
-      typeof item.equipment === "string" && ["weighted", "bodyweight", "timed"].includes(item.kind) &&
+      item && typeof item.name === "string" && item.name.length > 0 && item.name.length <= 80 &&
+      typeof item.muscle === "string" && item.muscle.length <= 40 &&
+      typeof item.equipment === "string" && item.equipment.length <= 40 &&
+      ["weighted", "bodyweight", "timed"].includes(item.kind) &&
       (equipment.includes(item.equipment) || item.equipment === "Bodyweight")
     );
     if (!allowed.length) return NextResponse.json({ error: "Choose at least one equipment option." }, { status: 400 });

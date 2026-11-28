@@ -14,32 +14,49 @@ export default function LoginPage() {
   const [message, setMessage] = useState("");
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setBusy(true); setMessage("");
+    setMessage("");
     const normalizedEmail = email.trim().toLowerCase();
-    if (mode === "register" && name.trim().length < 2) { setMessage("Please enter a name with at least 2 characters."); setBusy(false); return; }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) { setMessage("Enter a valid email address."); setBusy(false); return; }
-    if (password.length < 8) { setMessage("Your password must be at least 8 characters."); setBusy(false); return; }
-    const supabase = createClient();
-    if (mode === "register") {
-      const { data, error } = await supabase.auth.signUp({
-        email: normalizedEmail, password,
-        options: { data: { display_name: name }, emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://fitledger-tinggala.vercel.app"}/auth/callback` },
-      });
-      if (error) setMessage(error.message);
-      else if (data.session) window.location.assign("/");
-      else setMessage("Account created. Check your email to verify your account, then sign in.");
-    } else {
-      const { error } = await supabase.auth.signInWithPassword({ email: normalizedEmail, password });
-      if (error) setMessage(error.message.includes("Invalid login credentials") ? "Email or password is incorrect. Please try again." : error.message);
-      else window.location.assign("/");
+    if (mode === "register" && name.trim().length < 2) { setMessage("Please enter a name with at least 2 characters."); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) { setMessage("Enter a valid email address."); return; }
+    if (password.length < 8) { setMessage("Your password must be at least 8 characters."); return; }
+
+    setBusy(true);
+    try {
+      const supabase = createClient();
+      if (mode === "register") {
+        const { data, error } = await supabase.auth.signUp({
+          email: normalizedEmail, password,
+          options: { data: { display_name: name.trim() }, emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? window.location.origin}/auth/callback` },
+        });
+        if (error) setMessage(error.message);
+        else if (data.session) window.location.assign("/");
+        else setMessage("Account created. Check your email to verify your account, then sign in.");
+      } else {
+        const { error } = await supabase.auth.signInWithPassword({ email: normalizedEmail, password });
+        if (error) setMessage(error.message.includes("Invalid login credentials") ? "Email or password is incorrect. Please try again." : error.message);
+        else window.location.assign("/");
+      }
+    } catch (error) {
+      console.error("Authentication request failed", error);
+      setMessage("We couldn't complete that request. Check your connection and try again.");
+    } finally {
+      setBusy(false);
     }
-    setBusy(false);
   }
   async function resetPassword() {
     const normalizedEmail = email.trim().toLowerCase();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) { setMessage("Enter a valid email address first."); return; }
-    const { error } = await createClient().auth.resetPasswordForEmail(normalizedEmail, { redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://fitledger-tinggala.vercel.app"}/auth/callback?next=/reset-password` });
-    setMessage(error?.message ?? "Password reset email sent. Check your inbox.");
+    setBusy(true);
+    setMessage("");
+    try {
+      const { error } = await createClient().auth.resetPasswordForEmail(normalizedEmail, { redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? window.location.origin}/auth/callback?next=/reset-password` });
+      setMessage(error?.message ?? "Password reset email sent. Check your inbox.");
+    } catch (error) {
+      console.error("Password reset request failed", error);
+      setMessage("We couldn't send the reset email. Check your connection and try again.");
+    } finally {
+      setBusy(false);
+    }
   }
   return <main className="auth-shell">
     <section className="auth-visual">
@@ -60,8 +77,8 @@ export default function LoginPage() {
           {message && <div className="auth-message-box" role="status">{message}</div>}
           <button className="auth-submit" disabled={busy}>{busy ? "Please wait…" : mode==="login" ? "Sign in" : "Create account"} <ArrowRight size={17}/></button>
         </form>
-        {mode==="login" && <button className="auth-forgot" type="button" onClick={resetPassword}>Forgot password?</button>}
-        <div className="auth-switch">{mode==="login"?"New to FitLedger?":"Already have an account?"} <button onClick={()=>{setMode(mode==="login"?"register":"login");setMessage("");}}>{mode==="login"?"Create account":"Sign in"}</button></div>
+        {mode==="login" && <button className="auth-forgot" type="button" onClick={resetPassword} disabled={busy}>Forgot password?</button>}
+        <div className="auth-switch">{mode==="login"?"New to FitLedger?":"Already have an account?"} <button type="button" disabled={busy} onClick={()=>{setMode(mode==="login"?"register":"login");setMessage("");}}>{mode==="login"?"Create account":"Sign in"}</button></div>
         <p className="auth-legal">By continuing, you agree to use FitLedger as a personal tracking tool. It is not medical advice.</p>
       </div>
     </section>

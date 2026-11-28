@@ -1,0 +1,127 @@
+/* FitLedger visual system refinement — layered on the existing component styles. */
+:root{
+  --bg:#0d100d;
+  --panel:#151a15;
+  --line:#293329;
+  --text:#f3f6ed;
+  --muted:#a2ad9b;
+  --lime:#c9f27a;
+  --surface-raised:#1b221b;
+  --surface-soft:#20291f;
+  --focus-ring:0 0 0 3px rgba(201,242,122,.22);
+}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{background:radial-gradient(ellipse at 82% -18%,rgba(117,151,69,.10),transparent 38%),var(--bg);color:var(--text);line-height:1.5}
+::selection{background:rgba(201,242,122,.28);color:#f8ffed}
+button,a,input,select,textarea{ -webkit-tap-highlight-color:transparent}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--lime);outline-offset:3px;box-shadow:var(--focus-ring)}
+.app-shell{background:transparent}
+.sidebar{background:rgba(17,22,17,.94);border-color:#293329;backdrop-filter:blur(18px)}
+.brand{letter-spacing:-1.35px}
+.brand-mark{box-shadow:0 5px 20px rgba(201,242,122,.16)}
+.workspace-label{margin-top:42px}
+.nav-item{min-height:44px;border-radius:11px}
+.nav-item.active{background:linear-gradient(100deg,rgba(201,242,122,.15),rgba(201,242,122,.055));box-shadow:inset 0 0 0 1px rgba(201,242,122,.10)}
+.nav-item.active:before{left:-17px}
+.coach-card{background:linear-gradient(145deg,#202a1e,#171e17);border-color:#34432d;border-radius:14px}
+.profile-row{border-color:#303a2f}
+.main-panel{min-width:0}
+.topbar{background:rgba(13,16,13,.72);backdrop-filter:blur(18px);border-color:rgba(130,151,117,.16);position:sticky;top:0;z-index:12}
+.breadcrumb{color:#aab5a3}
+.breadcrumb b{color:#f0f5e8}
+.date-chip{color:#c1cbb9}
+.icon-btn{width:39px;height:39px;border-radius:11px;transition:background .2s,border-color .2s,color .2s,transform .2s}
+.icon-btn:hover{background:#20291f;border-color:#46563c;color:var(--lime);transform:translateY(-1px)}
+.content-wrap{max-width:1280px;padding-top:39px}
+.page-heading{margin-bottom:25px}
+.page-heading h1{line-height:1.12;letter-spacing:-1.7px}
+.page-heading p{color:#b0bba9;line-height:1.65}
+.eyebrow,.workspace-label,.breadcrumb,.subtle-label{letter-spacing:1.25px}
+.primary-btn,.food-save-btn,.auth-submit{min-height:44px;border-radius:10px;box-shadow:0 7px 22px rgba(167,211,91,.10);transition:transform .2s,box-shadow .2s,filter .2s}
+.primary-btn:hover,.food-save-btn:hover,.auth-submit:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(167,211,91,.18);filter:brightness(1.04)}
+.hero-grid{gap:16px}
+.hero-card{background:radial-gradient(circle at 84% 28%,rgba(201,242,122,.13),transparent 30%),linear-gradient(125deg,#202b1e,#151c16 72%);border-color:#3b4b32;border-radius:18px;box-shadow:0 14px 36px rgba(0,0,0,.14)}
+.hero-main{padding:27px 0 24px}
+.hero-graphic{filter:drop-shadow(0 0 18px rgba(201,242,122,.16));animation:fitledger-float 7s ease-in-out infinite}
+.orb-one{animation:fitledger-orbit 22s linear infinite}
+.orb-two{animation:fitledger-orbit 16s linear infinite reverse}
+.streak-card,.stat-card,.panel-card,.rank-card,.workout-banner,.nutrition-hero,.budget-hero,.food-entry-form,.meal-media-card,.exercise-card,.builder-panel,.builder-preferences{border-radius:15px;box-shadow:0 10px 28px rgba(0,0,0,.12)}
+.streak-card{background:linear-gradient(145deg,#1a211a,#141a14)}
+.stat-card{padding:18px;background:linear-gradient(150deg,#1a211a,#141914);transition:transform .22s,border-color .22s,background .22s}
+.stat-card:hover,.panel-card:hover{border-color:#3b4b37}
+.stat-value{font-variant-numeric:tabular-nums;letter-spacing:-1px}
+.progress-track,.wide-track,.rank-progress{height:6px;background:#303b2e}
+.progress-track span,.wide-track span,.budget-meter span{box-shadow:0 0 12px rgba(201,242,122,.2)}
+.panel-card{background:linear-gradient(150deg,#191f19,#141914);padding:20px}
+.quick-actions button{min-height:60px;transition:padding .18s,color .18s}
+.quick-actions button:hover{padding-left:6px}
+.quick-icon{width:39px;height:39px;border-radius:11px}
+.activity-row{min-height:54px}
+.empty-state{padding:18px 8px}
+.rank-card{background:radial-gradient(circle at 0% 50%,rgba(201,242,122,.09),transparent 42%),linear-gradient(110deg,#1d261b,#151b15);border-color:#3b4932;padding:20px 22px}
+.rank-emblem{border-radius:17px}
+.rank-level strong{font-variant-numeric:tabular-nums}
+.workout-banner,.nutrition-hero,.budget-hero{background:radial-gradient(circle at 92% 10%,rgba(201,242,122,.10),transparent 34%),linear-gradient(120deg,#202a1e,#151b15);border-color:#384731}
+.exercise-card,.food-entry-form,.builder-exercise,.builder-history-card{background:linear-gradient(145deg,#1a211a,#151a15);border-color:#303c2e}
+.exercise-card:hover,.builder-exercise:hover{border-color:#4b6040}
+.exercise-done{background:linear-gradient(120deg,#202b1d,#192119);border-color:#668347}
+input,select,textarea{accent-color:var(--lime)}
+input::placeholder,textarea::placeholder{color:#929f8c}
+input:disabled,button:disabled{opacity:.58;cursor:not-allowed}
+.food-entry-form input,.food-entry-form select,.nutrition-target-grid input,.exercise-fields input,.weight-input-label input,.strength-select-label select,.builder-preference-grid select,.builder-search,.builder-save-template input,.builder-custom input,.builder-custom select,.builder-edit-grid input,.builder-history-set input{border-radius:10px;background:#111811;border-color:#394837;min-height:44px}
+.food-entry-form input:focus,.food-entry-form select:focus,.nutrition-target-grid input:focus,.exercise-fields input:focus,.weight-input-label input:focus,.strength-select-label select:focus{border-color:var(--lime);box-shadow:var(--focus-ring)}
+.complete-btn,.builder-button,.workout-set-actions button,.spend-controls button,.add-food{border-radius:10px;min-height:40px;transition:transform .18s,border-color .18s,background .18s}
+.complete-btn:hover,.builder-button:hover,.workout-set-actions button:hover,.spend-controls button:hover,.add-food:hover{transform:translateY(-1px)}
+.mobile-nav{background:rgba(18,23,18,.94);border-color:#344032;backdrop-filter:blur(22px);box-shadow:0 -8px 30px rgba(0,0,0,.18);height:calc(70px + env(safe-area-inset-bottom));padding-bottom:calc(8px + env(safe-area-inset-bottom))}
+.mobile-nav button{min-width:58px;min-height:48px;gap:5px;font-weight:600}
+.mobile-nav button.selected{color:var(--lime)}
+.mobile-nav button.selected svg{filter:drop-shadow(0 0 7px rgba(201,242,122,.3))}
+.toast{border-radius:12px;box-shadow:0 16px 40px rgba(0,0,0,.35);padding:13px 17px}
+.footer-note{color:#99a48f;line-height:1.5}
+.auth-visual{background:radial-gradient(ellipse at 25% 60%,#29391f 0%,#171f16 43%,#0d100d 82%)}
+.auth-form-card input{border-radius:10px;min-height:48px}
+.auth-form-card input:focus{border-color:var(--lime);box-shadow:var(--focus-ring)}
+@keyframes fitledger-float{0%,100%{transform:translateY(0) rotate(-17deg)}50%{transform:translateY(-7px) rotate(-13deg)}}
+@keyframes fitledger-orbit{to{transform:rotate(360deg)}}
+@media(hover:hover) and (pointer:fine){
+ .stat-card:hover{transform:translateY(-3px)}
+ .panel-card:hover{transform:translateY(-1px)}
+}
+@media(max-width:760px){
+ .topbar{height:62px}
+ .content-wrap{padding:24px 16px 22px}
+ .page-heading{gap:12px;align-items:flex-end}
+ .page-heading h1{font-size:clamp(27px,7vw,32px);letter-spacing:-1.4px}
+ .page-heading p{font-size:12px}
+ .hero-card{padding:17px 16px 15px;min-height:205px}
+ .hero-main{padding:22px 0}
+ .hero-main h2{font-size:24px}
+ .hero-graphic{width:76px;transform:scale(.9) rotate(-17deg)}
+ .streak-card{padding:18px;min-height:170px}
+ .rank-card{padding:14px;gap:11px}
+ .rank-emblem{width:43px;height:43px}
+ .rank-copy h2{font-size:17px}
+ .rank-copy p{font-size:10px}
+ .rank-copy>small{font-size:9px;line-height:1.45}
+ .stats-grid{gap:9px}
+ .stat-card{padding:13px 12px}
+ .stat-top{font-size:10px;gap:6px}
+ .stat-value{font-size:clamp(18px,5vw,22px)}
+ .stat-foot{font-size:9px;line-height:1.45;align-items:flex-start}
+ .panel-card{padding:16px}
+ .quick-actions button{min-height:62px}
+ .mobile-nav{padding-left:7px;padding-right:7px}
+ .mobile-nav button{min-width:0;flex:1;font-size:9px}
+ .footer-note{padding:0 10px;flex-wrap:wrap;text-align:center}
+ .toast{bottom:calc(82px + env(safe-area-inset-bottom));max-width:calc(100vw - 28px);white-space:normal;text-align:center}
+}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ .hero-graphic,.orb-one,.orb-two{animation:none!important}
+ .stat-card,.panel-card,.primary-btn,.food-save-btn,.icon-btn,.quick-actions button{transition:none!important}
+}
+
+/* Keyboard users can jump past the persistent navigation. */
+.skip-link{position:fixed;left:12px;top:12px;z-index:1000;padding:10px 14px;border-radius:9px;background:var(--lime);color:#172011;font-weight:700;transform:translateY(-160%);transition:transform .2s ease}
+.skip-link:focus{transform:translateY(0)}
+@media(prefers-reduced-motion:reduce){.skip-link{transition:none}}
